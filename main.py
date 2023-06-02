@@ -1,10 +1,28 @@
+source_list = 'sourceList.txt'  # Specify the file where sources are stored and read from
+
+
+class SourceGroup:
+    name = ""  # Stores name of group
+    sources = None  # list of sources within group
+
+    def __init__(self, name):
+        self.name = name
 
 
 def main():
     print("Project_Xray: V0.0")
 
-    # Import from file:
+    # Create a list of groups
+    groups = []
 
+    # Import from file:
+    f = open(source_list, "r+", encoding='utf-8')  # Open file for reading
+    for line in f:  # For all lines
+        if line[0] == '#':  # If the line starts with a # [group declaration], create a new group.
+            groups.append(SourceGroup(line[2:]))
+
+    for group in groups:
+        print(group.name)
 
     # Feature Overview:
     #     Has a list of sources, read from a file, which can be put into arbitrary groups
@@ -34,8 +52,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-class SourceGroup:
-    def __init__(self):
-        pass
